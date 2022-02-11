@@ -1,0 +1,19 @@
+INSERT INTO driverInfo 
+VALUES (‘8453799657’, ‘Raghav’,’#1’,’7’, ‘Y’);
+
+INSERT INTO driverInfo 
+VALUES (‘9995472340’, ‘Arun’,’#2’,’9’, ‘N’);
+
+INSERT INTO driverInfo 
+VALUES (‘8847107345’, ‘Vikram’,’#3’,’5’, ‘Y’); 
+INSERT INTO driverInfo 
+VALUES (‘8811126834’, ‘Tanmay’,’#4’,’6’, ‘Y’); 
+INSERT INTO driverInfo 
+VALUES (‘9988124552’, ‘Gopal’,’#5’,’3’, ‘Y’); 
+INSERT INTO driverInfo 
+VALUES (‘8899541266’, ‘Vikas’,’#6’,’5’, ‘N’); 
+INSERT INTO driverInfo 
+VALUES (‘8867893386’, ‘Suryansh’,’#7’,’4’, ‘Y’);
+
+
+    

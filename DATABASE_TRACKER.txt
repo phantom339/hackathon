@@ -1,0 +1,39 @@
+////////////////////////////////////////////////////////////////////////////
+CREATE TABLE driverInfo (	
+	phNo bigint NOT NULL UNIQUE,
+    	drName varchar(255) NOT NULL,
+	trackerID varchar(50) NOT NULL,
+	seatAvail int NOT NULL,
+    	VacStat char(1) Not NULL,
+    	CHECK (vacStat = 'y' OR vacstat ='n'),
+	PRIMARY KEY (trackerID)
+);
+
+///////////////////////////////////////////////////////////////////////////
+CREATE TABLE User_Info(
+	name varchar(255) NOT NULL,
+	age  int NOT NULL NOT NULL,
+	User_phno bigint PRIMARY KEY NOT NULL,
+	gender char(1) NOT NULL,
+	passwd varchar(30) NOT NULL,
+	CHECK (gender = 'M' OR gender = 'F')
+);
+   
+////////////////////////////////////////////////////////////////////////////
+
+CREATE TABLE Book(
+	trackerID varchar(50) NOT NULL,
+	name char(100) NOT NULL,
+	User_phno bigint PRIMARY KEY NOT NULL,
+	gender char(1) NOT NULL,
+	Book_Date datetime NOT NULL,
+	j_date datetime NOT NULL,
+	str_Point varchar(30) NOT NULL,
+	end_Point varchar(30) NOT NULL,
+	PRIMARY KEY (User_phno),
+	CHECK (gender = 'M' OR gernder = 'F')
+);
+
+////////////////////////////////////////////////////////////////////////////
+
+
