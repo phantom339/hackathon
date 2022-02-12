@@ -1,19 +1,54 @@
-# Tracker management system
-
 import mysql.connector as a
 import pyttsx3
+from random import *
+
 
 
 
 def show_available_trackers():
-    pass
+    print("Remember the Tracker ID of the Tracker you are planning to book")
+    sql = "Select trackerID,seatAvail From driverInfo;"
+    cursor = mydb.cursor()
+    cursor.execute(sql)
+    mydb.commit()
+    c = input("Do you want to go back to main menu(Y/N")
+    if c=="Y" or "y":
+        main()
+    else:
+        print("staying on the current page:")
+        show_available_trackers()
 
 
 def book():
-    pass
+    tracker = input("Enter the Tracker ID:")
+    phno = int(inout("Enter your phone number:"))
+    gen = input("Enter you gender(M/F):")
+    j_date = input("Enter Journey date:")
+    srt_point = input("Enter your current location: ")
+    end_point = input("Enter your destination: ")
+    number = int(input("Enter the number of ticket you want to book : "))
+
+    for i in range(1, number + 1):
+        n = input("Enter Passanger name  : ")
+        age = int(input("Enter Passanger age : "))
+        try:
+            sql = "INSERT INTO Book (trackerID,name,user_phno,gender,j_date,str_Point,end_Point) VALUES ('{}',{},'{}','{}',{},{},'{}','{}')".format(
+                tracker, n, age, phno, gen, j_date, srt_point, end_point,)
+            cursor.execute(sql)
+            mydb.commit()
+            print(i, " ticket registered\n")
+        except exception as e:
+            print(e)
+    main()
 
 def enquiry():
-    pass
+    print("Driver Info:\n")
+    sql = "Select phNo, drName, VacStat From driverInfo"
+    cursor = mydb.cursor()
+    cursor.execute(sql)
+    mydb.commit()
+    main()
+
 
 def  report_iss():
     pass
@@ -50,7 +85,8 @@ def login():
     p="@@".join(password)
     if len(str(phone))==10 or len(str(password))>=8:
       try:
-        sql="SELECT * FROM user_info WHERE phone={} and pass='{}'".format(phone,p)
+        sql="SELECT * FROM user_info WHERE User_phno='{}' and passwd='{}';".format(phone,p)
+        cursor=mydb.cursor()
         cursor.execute(sql)
         a=cursor.fetchone()
         user_id=a[0]
@@ -69,6 +105,8 @@ def login():
         
 def signup():
     usename=input("Enter your username : ")
+    age = int(input("Enter your age:"))
+    gen = input("Enter your gender(M/F):")
     password=input("Enter your password : ")
     c_pass=input("Enter your password again : ")
     if password==c_pass or len(str(password))>=8:
@@ -82,10 +120,10 @@ def signup():
         if user_ans==r1+r2:
             if len(str(phone))==10:
               try:
-                cursor=conn.cursor()
-                sql="INSERT INTO user_info (username,pass,phone) VALUES ('{}','{}','{}')".format(usename,p,phone)
+                cursor=mydb.cursor()
+                sql="INSERT INTO user_info (name,age,User_phno,gender,passwd) VALUES ('{}','{}','{}','{}','{}')".format(usename, age, phone, gen, p)
                 cursor.execute(sql)
-                conn.commit()
+                mydb.commit()
                 print("Account Created succesfully\n---------------")
                 log_sign()
               except:
@@ -112,19 +150,20 @@ def log_sign():
     elif user_ch_1==3:
         mapp()
     else:
-        print("Wrong input choosen")
+        print("Wrong input chosen")
         log_sign()
-
+        
+        
 try:
-
-    global conn
+    
+    global mydb
     user_id=""
-    conn=a.connect(host="localhost",user="root",passwd="Mapa@11dec",database="tracker")
-    cursor=conn.cursor()
+    mydb=a.connect(host="localhost",user="root",passwd="passwd123",database="tracker")
+    cursor=mydb.cursor()
     if user_id=="":
        log_sign()
     if user_id!="":
        main()
-
+       
 except:
-    print("The server is probably not runnng....")
+    print("The server is probably not runnng....")  
