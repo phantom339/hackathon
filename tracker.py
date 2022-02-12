@@ -6,17 +6,16 @@ from random import *
 
 
 def show_available_trackers():
-    print("Remember the Tracker ID of the Tracker you are planning to book")
+    Label(root,text="Remember the Tracker ID of the Tracker you are planning to book\n").pack()
+
     sql = "Select trackerID,seatAvail From driverInfo;"
     cursor = mydb.cursor()
     cursor.execute(sql)
-    mydb.commit()
-    c = input("Do you want to go back to main menu(Y/N")
-    if c=="Y" or "y":
-        main()
-    else:
-        print("staying on the current page:")
-        show_available_trackers()
+    row=cursor.fetchall()
+    Label(root,text=f"{row}").pack()
+
+    Button(text="Main Menu",command=main).pack()
+    Button(text="Refresh",command=show_available_trackers).pack()
 
 
 def book():
